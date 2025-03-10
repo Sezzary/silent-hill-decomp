@@ -165,7 +165,8 @@ def main():
         size, lba, name, directory, type = _parseEntry(rawEntry, isPal)
         fullpath = os.path.join(directory, f"{name}.{type.extension}" if not type == FILE_TYPES[15] else f"{name}")
         headerText += f"/* {i:4d} */ {_formatEntry(size, lba, name, directory, type, isPal)}, // {fullpath}\n"
-        enumText += f"    FILE_{fullpath.replace("/", "_").replace(".", "_")} = {i}, // {fullpath}\n"
+        enumName = fullpath.replace("/", "_").replace(".", "_")
+        enumText += f"    FILE_{enumName} = {i}, // {fullpath}\n"
         entry = TableEntry(fullpath, type, size, lba)
         
         match directory:
@@ -175,15 +176,17 @@ def main():
                 entriesSilent.append(entry)
     executable.close
     
-    with open(os.path.join(args.outputFolder, "filetable.c.inc"), "w") as f:
-        f.write(headerText)
-    with open(os.path.join(args.outputFolder, "fileenum.h.inc"), "w") as f:
-        f.write(enumText)
-    
     _extract(entriesSilent, args.outputFolder, args.silentFile, 2048, region.id)
     
     if region.id != "NTSC Nov 24, 1998":
         _extract(entriesHill, args.outputFolder, args.hillFile, 2352, region.id)
+
+    with open(os.path.join(args.outputFolder, "filetable.c.inc"), "a+") as f:
+        f.truncate(0)
+        f.write(headerText)
+    with open(os.path.join(args.outputFolder, "fileenum.h.inc"), "a+") as f:
+        f.truncate(0)
+        f.write(enumText)
     
     logging.info("All done!")
 

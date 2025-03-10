@@ -106,7 +106,6 @@ define make_elf_target
 $2: $2.elf
 
 $2.elf: $(call gen_o_files, $1)
-	@mkdir -p $(dir $2)
 endef
 
 else
