@@ -151,16 +151,16 @@ typedef enum _THROUGH_DOOR_SET_CMD_TYPE
 STATIC_ASSERT_SIZEOF(THROUGH_DOOR_SET_CMD_TYPE, 4);
 
 /** @brief 2D camera-specific axis-aligned bounding box (AABB), with values in Q7.8 format.
- * TODO: Maybe actually Q11.4?
+ * TODO: Maybe actually Q11.4? Values are shifted << 8, indicating a conversion to Q*.12.
  *
  * Constrains the camera position to a limited area on the XZ plane.
  */
 typedef struct _VC_LIMIT_AREA
 {
-    q7_8 min_hx;
-    q7_8 max_hx;
-    q7_8 min_hz;
-    q7_8 max_hz;
+    q11_4 min_hx;
+    q11_4 max_hx;
+    q11_4 min_hz;
+    q11_4 max_hz;
 } VC_LIMIT_AREA;
 STATIC_ASSERT_SIZEOF(VC_LIMIT_AREA, 8);
 
@@ -213,8 +213,8 @@ typedef struct _VC_ROAD_DATA
     q27_4             ofs_watch_hy_14   : 8;
     u32               field_15          : 4;
     s16               cam_mv_type_14    : 4; /** `VC_CAM_MV_TYPE` */
-    q0_8              fix_ang_x_16;          /** NOTE: Part of union in SH2 `VC_ROAD_DATA`. */
-    q0_8              fix_ang_y_17;
+    q0_7              fix_ang_x_16;          /** NOTE: Part of union in SH2 `VC_ROAD_DATA`. */
+    q0_7              fix_ang_y_17;
 } VC_ROAD_DATA;
 STATIC_ASSERT_SIZEOF(VC_ROAD_DATA, 24);
 
@@ -286,7 +286,7 @@ typedef struct _VC_WORK
     q3_12                     cam_tgt_mv_ang_y_10C;           /** Target Y angles. */
     s8                        unk_10E[2];
     s32                       cam_tgt_spd_110;                               /** Target speed. */
-    VECTOR3                   chara_pos_114;                                 /** Locked-on character position. */
+    VECTOR3                   chara_pos_114;                                 /** Q19.12 | Locked-on character position. */
     s32                       chara_bottom_y_120;                            /** Locked-on character bottom height. */
     s32                       chara_top_y_124;                               /** Locked-on character top height. */
     s32                       chara_center_y_128;                            /** Locked-on character center height. */

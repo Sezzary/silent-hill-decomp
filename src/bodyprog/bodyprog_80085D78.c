@@ -2880,7 +2880,7 @@ s32 func_8008D8C0(s16 x0, s32 x1, s32 x2) // 0x8008D8C0
     return (res > FP_FLOAT_TO(24.0f, Q8_SHIFT)) ? FP_FLOAT_TO(24.0f, Q8_SHIFT) : res;
 }
 
-// Used by func_8008D990
+// Used by `func_8008D990`.
 u16 D_800AFD7C[] =
 {
     0xF839, 0xF889, 0xFA39, 0xFAE4,
@@ -2899,21 +2899,23 @@ void func_8008E4EC(s_LmHeader* lmHeader) // 0x8008E4EC
     func_80056504(lmHeader, D_8002B2CC.str, &img0, 1);
 }
 
-s_WaterZone* Map_WaterZoneGet(s32 posX, s32 posZ, s_WaterZone* waterZone)
+s_WaterZone* Map_WaterZoneGet(q27_4 posX, q27_4 posZ, s_WaterZone* waterZones)
 {
-    s_WaterZone* zonePtr;
+    s_WaterZone* curWaterZone;
 
-    if (waterZone == NULL)
+    // No water zones.
+    if (waterZones == NULL)
     {
         return NULL;
     }
 
-    for (zonePtr = waterZone; zonePtr->enabled_0; zonePtr++)
+    // Run through water zones.
+    for (curWaterZone = waterZones; curWaterZone->enabled_0; curWaterZone++)
     {
-        if (posX >= zonePtr->minX_4 && posX < zonePtr->maxX_6 &&
-            posZ >= zonePtr->minZ_8 && posZ < zonePtr->maxZ_A)
+        if (posX >= curWaterZone->minX_4 && posX < curWaterZone->maxX_6 &&
+            posZ >= curWaterZone->minZ_8 && posZ < curWaterZone->maxZ_A)
         {
-            return zonePtr;
+            return curWaterZone;
         }
     }
 

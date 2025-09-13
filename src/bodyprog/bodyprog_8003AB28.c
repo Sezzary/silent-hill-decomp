@@ -975,7 +975,9 @@ void func_8003C3AC() // 0x8003C3AC
     s32             var_s1;
     u8              flags1;
     u8              flags0;
-    s_SubCharacter* chara = &g_SysWork.player_4C.chara_0;
+    s_SubCharacter* chara;
+
+    chara = &g_SysWork.player_4C.chara_0;
 
     if ((u8)D_800BCE18.field_0[0].field_4 != 0)
     {

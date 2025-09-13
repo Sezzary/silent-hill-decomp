@@ -3182,8 +3182,16 @@ s32 func_8008D8C0(s16 x0, s32 x1, s32 x2);
 
 void func_8008D990(s32, s32, VECTOR3*, s32, s32);
 
-/** `posX` and `posX` appear to be in Q27.4. */
-s_WaterZone* Map_WaterZoneGet(s32 posX, s32 posZ, s_WaterZone* waterZone);
+/** @brief Gets the active water zone at the given position.
+ *
+ * TODO: Are `posX` and `posX` really in Q27.4?
+ *
+ * @param posX X position.
+ * @param posZ Z position.
+ * @param waterZones Water zone array.
+ * @return Active water zone at the given poisition.
+ */
+s_WaterZone* Map_WaterZoneGet(q27_4 posX, q27_4 posZ, s_WaterZone* waterZones);
 
 void func_8008E5B4(void);
 

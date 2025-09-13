@@ -969,18 +969,17 @@ void vcSetNearRoadAryByCharaPos(VC_WORK* w_p, VC_ROAD_DATA* road_ary_list, s32 h
 
         if (!flag)
         {
-            // TO Q19.12?
-            rd_min_hx = FP_TO(road_data_ptr->lim_rd_8.min_hx, Q8_SHIFT);
-            rd_max_hx = FP_TO(road_data_ptr->lim_rd_8.max_hx, Q8_SHIFT);
-            rd_min_hz = FP_TO(road_data_ptr->lim_rd_8.min_hz, Q8_SHIFT);
-            rd_max_hz = FP_TO(road_data_ptr->lim_rd_8.max_hz, Q8_SHIFT);
+            rd_min_hx = Q27_4_TO_Q19_12(road_data_ptr->lim_rd_8.min_hx);
+            rd_max_hx = Q27_4_TO_Q19_12(road_data_ptr->lim_rd_8.max_hx);
+            rd_min_hz = Q27_4_TO_Q19_12(road_data_ptr->lim_rd_8.min_hz);
+            rd_max_hz = Q27_4_TO_Q19_12(road_data_ptr->lim_rd_8.max_hz);
 
             unused2 = 0;
 
-            sw_min_hx = FP_TO(road_data_ptr->lim_sw_0.min_hx, Q8_SHIFT);
-            sw_max_hx = FP_TO(road_data_ptr->lim_sw_0.max_hx, Q8_SHIFT);
-            sw_min_hz = FP_TO(road_data_ptr->lim_sw_0.min_hz, Q8_SHIFT);
-            sw_max_hz = FP_TO(road_data_ptr->lim_sw_0.max_hz, Q8_SHIFT);
+            sw_min_hx = Q27_4_TO_Q19_12(road_data_ptr->lim_sw_0.min_hx);
+            sw_max_hx = Q27_4_TO_Q19_12(road_data_ptr->lim_sw_0.max_hx);
+            sw_min_hz = Q27_4_TO_Q19_12(road_data_ptr->lim_sw_0.min_hz);
+            sw_max_hz = Q27_4_TO_Q19_12(road_data_ptr->lim_sw_0.max_hz);
 
             if ((sum_pos_x >= sw_min_hx && sw_max_hx >= diff_pos_x && sum_pos_z >= sw_min_hz && sw_max_hz >= diff_pos_z) ||
                 (sum_pos_x >= rd_min_hx && rd_max_hx >= diff_pos_x && sum_pos_z >= rd_min_hz && rd_max_hz >= diff_pos_z))
@@ -1268,8 +1267,8 @@ s32 vcGetBestNewCurNearRoad(VC_NEAR_ROAD_DATA** new_cur_pp, VC_CAM_CHK_TYPE chk_
     {
         new_cur_p    = &vcNullNearRoad;
         new_cur_dist = vcGetXZSumDistFromLimArea(&dummy, &dummy, pos->vx, pos->vz,
-                                                 FP_TO(vcNullNearRoad.rd_14.min_hx, Q8_SHIFT), FP_TO(vcNullNearRoad.rd_14.max_hx, Q8_SHIFT),
-                                                 FP_TO(vcNullNearRoad.rd_14.min_hz, Q8_SHIFT), FP_TO(vcNullNearRoad.rd_14.max_hz, Q8_SHIFT),
+                                                 Q27_4_TO_Q19_12(vcNullNearRoad.rd_14.min_hx), Q27_4_TO_Q19_12(vcNullNearRoad.rd_14.max_hx),
+                                                 Q27_4_TO_Q19_12(vcNullNearRoad.rd_14.min_hz), Q27_4_TO_Q19_12(vcNullNearRoad.rd_14.max_hz),
                                                  vcNullNearRoad.road_p_0->flags_10 & VC_RD_MARGE_ROAD_F);
     }
 
@@ -1300,17 +1299,17 @@ s32 vcGetNearestNEAR_ROAD_DATA(VC_NEAR_ROAD_DATA** out_nearest_p_addr, VC_CAM_CH
             switch (chk_type)
             {
                 case VC_CHK_NEAREST_ROAD_TYPE:
-                    min_x = FP_TO(n_rd_p->rd_14.min_hx, Q8_SHIFT);
-                    max_x = FP_TO(n_rd_p->rd_14.max_hx, Q8_SHIFT);
-                    min_z = FP_TO(n_rd_p->rd_14.min_hz, Q8_SHIFT);
-                    max_z = FP_TO(n_rd_p->rd_14.max_hz, Q8_SHIFT);
+                    min_x = Q27_4_TO_Q19_12(n_rd_p->rd_14.min_hx);
+                    max_x = Q27_4_TO_Q19_12(n_rd_p->rd_14.max_hx);
+                    min_z = Q27_4_TO_Q19_12(n_rd_p->rd_14.min_hz);
+                    max_z = Q27_4_TO_Q19_12(n_rd_p->rd_14.max_hz);
                     break;
 
                 case VC_CHK_NEAREST_SWITCH_TYPE:
-                    min_x = FP_TO(n_rd_p->sw_1C.min_hx, Q8_SHIFT);
-                    max_x = FP_TO(n_rd_p->sw_1C.max_hx, Q8_SHIFT);
-                    min_z = FP_TO(n_rd_p->sw_1C.min_hz, Q8_SHIFT);
-                    max_z = FP_TO(n_rd_p->sw_1C.max_hz, Q8_SHIFT);
+                    min_x = Q27_4_TO_Q19_12(n_rd_p->sw_1C.min_hx);
+                    max_x = Q27_4_TO_Q19_12(n_rd_p->sw_1C.max_hx);
+                    min_z = Q27_4_TO_Q19_12(n_rd_p->sw_1C.min_hz);
+                    max_z = Q27_4_TO_Q19_12(n_rd_p->sw_1C.max_hz);
                     break;
 
                 default:
@@ -1440,7 +1439,7 @@ void vcMakeNormalWatchTgtPos(VECTOR3* watch_tgt_pos, s16* watch_tgt_ang_z_p, VC_
                 break;
         }
 
-        watch_y = FP_TO(vcWork.cur_near_road_2B8.road_p_0->ofs_watch_hy_14, Q8_SHIFT) + w_p->chara_bottom_y_120;
+        watch_y = Q27_4_TO_Q19_12(vcWork.cur_near_road_2B8.road_p_0->ofs_watch_hy_14) + w_p->chara_bottom_y_120;
         vcSetWatchTgtXzPos(watch_tgt_pos, &w_p->chara_pos_114, &w_p->cam_pos_50, tgt_chara2watch_cir_dist, tgt_watch_cir_r, w_p->chara_eye_ang_y_144);
         vcSetWatchTgtYParam(watch_tgt_pos, w_p, cam_mv_type, watch_y);
     }
@@ -1785,8 +1784,7 @@ void vcAdjustWatchYLimitHighWhenFarView(VECTOR3* watch_pos, VECTOR3* cam_pos, s1
 
     if (cam_ang_x > max_cam_ang_x)
     {
-        // TODO: What Q format?
-        s32 ofs_y     = FP_TO(((FP_FROM(dist, Q4_SHIFT)) * Math_Sin(max_cam_ang_x)) / Math_Cos(max_cam_ang_x), Q4_SHIFT);
+        s32 ofs_y     = FP_METER_FROM_GEO(((FP_METER_TO_GEO(dist)) * Math_Sin(max_cam_ang_x)) / Math_Cos(max_cam_ang_x));
         watch_pos->vy = cam_pos->vy - ofs_y;
     }
 }
@@ -1926,8 +1924,8 @@ void vcMakeIdealCamPosForFixAngCam(VECTOR3* ideal_pos, VC_WORK* w_p) // 0x80083A
 
     limit_area = &w_p->cur_near_road_2B8.road_p_0->lim_rd_8;
     vcGetXZSumDistFromLimArea(&dist_x_to_lim_area, &dist_z_to_lim_area, w_p->chara_pos_114.vx, w_p->chara_pos_114.vz,
-                              FP_TO(w_p->cur_near_road_2B8.rd_14.min_hx, Q8_SHIFT), FP_TO(w_p->cur_near_road_2B8.rd_14.max_hx, Q8_SHIFT),
-                              FP_TO(w_p->cur_near_road_2B8.rd_14.min_hz, Q8_SHIFT), FP_TO(w_p->cur_near_road_2B8.rd_14.max_hz, Q8_SHIFT), 0);
+                              Q27_4_TO_Q19_12(w_p->cur_near_road_2B8.rd_14.min_hx), Q27_4_TO_Q19_12(w_p->cur_near_road_2B8.rd_14.max_hx),
+                              Q27_4_TO_Q19_12(w_p->cur_near_road_2B8.rd_14.min_hz), Q27_4_TO_Q19_12(w_p->cur_near_road_2B8.rd_14.max_hz), 0);
 
     abs_dist_x_to_lim_area = dist_x_to_lim_area;
     if (abs_dist_x_to_lim_area < 0)
@@ -2185,11 +2183,10 @@ void vcAdjustXzInLimAreaUsingMIN_IN_ROAD_DIST(s32* x_p, s32* z_p, VC_LIMIT_AREA*
     s32 x = *x_p;
     s32 z = *z_p;
 
-    // TODO: What's this shift doing?
-    min_x = FP_TO(lim_p->min_hx, Q8_SHIFT) + MIN_IN_ROAD_DIST;
-    max_x = FP_TO(lim_p->max_hx, Q8_SHIFT) - MIN_IN_ROAD_DIST;
-    min_z = FP_TO(lim_p->min_hz, Q8_SHIFT) + MIN_IN_ROAD_DIST;
-    max_z = FP_TO(lim_p->max_hz, Q8_SHIFT) - MIN_IN_ROAD_DIST;
+    min_x = Q27_4_TO_Q19_12(lim_p->min_hx) + MIN_IN_ROAD_DIST;
+    max_x = Q27_4_TO_Q19_12(lim_p->max_hx) - MIN_IN_ROAD_DIST;
+    min_z = Q27_4_TO_Q19_12(lim_p->min_hz) + MIN_IN_ROAD_DIST;
+    max_z = Q27_4_TO_Q19_12(lim_p->max_hz) - MIN_IN_ROAD_DIST;
 
     if (max_x < min_x)
     {
@@ -2363,10 +2360,10 @@ void vcCamTgtMvVecIsFlipedFromCharaFront(VECTOR3* tgt_mv_vec, VC_WORK* w_p, s32 
         post_tgt_pos.vx = pre_tgt_pos.vx + FP_MULTIPLY(flip_dist, Math_Sin(flip_ang_y), Q12_SHIFT);
         post_tgt_pos.vz = pre_tgt_pos.vz + FP_MULTIPLY(flip_dist, Math_Cos(flip_ang_y), Q12_SHIFT);
 
-        min_x = FP_TO(use_nearest_p->rd_14.min_hx, Q8_SHIFT) + MIN_IN_ROAD_DIST;
-        max_x = FP_TO(use_nearest_p->rd_14.max_hx, Q8_SHIFT) - MIN_IN_ROAD_DIST;
-        min_z = FP_TO(use_nearest_p->rd_14.min_hz, Q8_SHIFT) + MIN_IN_ROAD_DIST;
-        max_z = FP_TO(use_nearest_p->rd_14.max_hz, Q8_SHIFT) - MIN_IN_ROAD_DIST;
+        min_x = Q27_4_TO_Q19_12(use_nearest_p->rd_14.min_hx) + MIN_IN_ROAD_DIST;
+        max_x = Q27_4_TO_Q19_12(use_nearest_p->rd_14.max_hx) - MIN_IN_ROAD_DIST;
+        min_z = Q27_4_TO_Q19_12(use_nearest_p->rd_14.min_hz) + MIN_IN_ROAD_DIST;
+        max_z = Q27_4_TO_Q19_12(use_nearest_p->rd_14.max_hz) - MIN_IN_ROAD_DIST;
 
         if (max_x < min_x)
         {

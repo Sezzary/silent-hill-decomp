@@ -118,6 +118,14 @@
 #define Q7_8(x) \
     (s16)FP_FLOAT_TO(x, Q8_SHIFT)
 
+/** @brief Converts a floating-point value to fixed-point Q11.4.
+ *
+ * @param x Value to convert (`float`).
+ * @return `x` converted to fixed-point Q11.4 (`s16`).
+ */
+#define Q11_4(x) \
+    (s16)FP_FLOAT_TO(x, Q8_SHIFT)
+
 /** @brief Converts a floating-point value to fixed-point Q3.12.
  *
  * @param x Value to convert (`float`).
@@ -149,6 +157,9 @@
  */
 #define Q19_12(x) \
     (s32)FP_FLOAT_TO(x, Q12_SHIFT)
+
+// TODO: Some of these Q converters can be merged. E.g. can have a generic `QX_4_TO_QX_12` macro instead of several
+// specialised verbose ones with a cast for every possible type.
 
 /** @brief Converts a fixed-point value from Q0.8 to Q3.12.
  *
