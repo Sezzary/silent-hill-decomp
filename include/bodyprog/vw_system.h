@@ -150,9 +150,7 @@ typedef enum _THROUGH_DOOR_SET_CMD_TYPE
 } THROUGH_DOOR_SET_CMD_TYPE;
 STATIC_ASSERT_SIZEOF(THROUGH_DOOR_SET_CMD_TYPE, 4);
 
-/** @brief 2D camera-specific axis-aligned bounding box (AABB), with values in Q7.8 format.
- * TODO: Maybe actually Q11.4? Values are shifted << 8, indicating a conversion to Q*.12.
- *
+/** @brief 2D camera-specific axis-aligned bounding box (AABB).
  * Constrains the camera position to a limited area on the XZ plane.
  */
 typedef struct _VC_LIMIT_AREA
