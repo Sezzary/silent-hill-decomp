@@ -1,14 +1,15 @@
-#include "game.h"
+#include "common.h"
+#include "bodyprog/bodyprog.h"
 
 #include <psyq/libetc.h>
 #include <psyq/libpad.h>
 #include <psyq/strings.h>
 
-#include "bodyprog/bodyprog.h"
 #include "bodyprog/gfx/screen_draw.h"
 #include "bodyprog/gfx/text_draw.h"
 #include "bodyprog/math/math.h"
 #include "bodyprog/memcard.h"
+#include "game.h"
 #include "main/fsqueue.h"
 #include "main/rng.h"
 #include "screens/stream/stream.h"

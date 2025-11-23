@@ -1,8 +1,5 @@
+#include "common.h"
 #include "game.h"
-#include "inline_no_dmpsx.h"
-
-#include <psyq/libapi.h>
-#include <psyq/strings.h>
 
 #include "bodyprog/bodyprog.h"
 #include "bodyprog/math/math.h"

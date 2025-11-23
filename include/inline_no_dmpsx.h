@@ -1,8 +1,6 @@
 #ifndef _INLINE_NO_DMPSX_H_
 #define _INLINE_NO_DMPSX_H_
 
-#include "inline_c.h"
-
 /* Replace macros originally defined for dmpsx. */
 
 #undef gte_rtps

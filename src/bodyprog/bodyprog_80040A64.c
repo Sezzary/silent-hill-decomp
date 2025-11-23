@@ -1,12 +1,9 @@
-#include "game.h"
-#include "inline_no_dmpsx.h"
-
-#include <psyq/strings.h>
-
+#include "common.h"
 #include "bodyprog/bodyprog.h"
+
 #include "bodyprog/math/math.h"
+#include "game.h"
 #include "main/fsqueue.h"
-#include "types.h"
 
 /** Known contents:
  * - Map loading funcs

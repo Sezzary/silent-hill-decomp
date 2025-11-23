@@ -1,10 +1,18 @@
 #ifndef _COMMON_H
 #define _COMMON_H
 
+// Standard
 #include <ctype.h>
 #include <limits.h>
 #include <memory.h>
 
+// PsyQ
+#include <psyq/inline_c.h>
+#include <psyq/libapi.h>
+#include <psyq/strings.h>
+
+// Resources
+#include "inline_no_dmpsx.h"
 #include "include_asm.h"
 #include "types.h"
 

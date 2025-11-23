@@ -1,11 +1,7 @@
 #ifndef _TYPES_H
 #define _TYPES_H
 
-#include "psyq/sys/types.h"
-
-#ifndef NULL
-#define NULL 0
-#endif
+#include <psyq/sys/types.h>
 
 typedef signed char        byte;
 typedef signed char        s8;
@@ -31,7 +27,11 @@ typedef unsigned int       q24_8;  // Q24.8 fixed-point.
 typedef unsigned int       q20_12; // Q20.12 fixed-point.
 
 #ifndef __cplusplus
-typedef enum { false, true } bool;
+    typedef enum { false, true } bool;
+#endif
+
+#ifndef NULL
+    #define NULL 0
 #endif
 
 #define NO_VALUE -1
