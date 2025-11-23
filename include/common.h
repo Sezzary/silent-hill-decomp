@@ -1,6 +1,10 @@
 #ifndef _COMMON_H
 #define _COMMON_H
 
+#include <ctype.h>
+#include <limits.h>
+#include <memory.h>
+
 #include "include_asm.h"
 #include "types.h"
 

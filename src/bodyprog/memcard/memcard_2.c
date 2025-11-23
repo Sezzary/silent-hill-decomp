@@ -1,6 +1,5 @@
+#include "common.h"
 #include "game.h"
-
-#include <memory.h>
 
 #include "bodyprog/bodyprog.h"
 #include "bodyprog/memcard.h"

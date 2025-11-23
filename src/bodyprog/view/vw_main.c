@@ -1,3 +1,4 @@
+#include "common.h"
 #include "game.h"
 
 #include "bodyprog/view/vw_main.h"

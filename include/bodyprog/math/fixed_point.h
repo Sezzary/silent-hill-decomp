@@ -1,8 +1,6 @@
 #ifndef _BODYPROG_MATH_FIXEDPOINT_H
 #define _BODYPROG_MATH_FIXEDPOINT_H
 
-#include "types.h"
-
 #include "bodyprog/math/arithmetic.h"
 #include "bodyprog/math/constants.h"
 

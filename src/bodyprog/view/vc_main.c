@@ -1,6 +1,5 @@
+#include "common.h"
 #include "game.h"
-
-#include <abs.h>
 
 #include "bodyprog/bodyprog.h"
 #include "bodyprog/math/math.h"

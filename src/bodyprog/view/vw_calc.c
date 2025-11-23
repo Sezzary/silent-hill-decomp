@@ -1,3 +1,4 @@
+#include "common.h"
 #include "game.h"
 #include "inline_no_dmpsx.h"
 #include "gtemac.h"
